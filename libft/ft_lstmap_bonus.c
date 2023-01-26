@@ -6,16 +6,16 @@
 /*   By: mecauchy <mecauchy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 22:36:40 by mecauchy          #+#    #+#             */
-/*   Updated: 2023/01/05 11:16:05 by mecauchy         ###   ########.fr       */
+/*   Updated: 2023/01/25 23:58:52 by mecauchy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
+t_lst	*ft_lstmap(t_lst *lst, void *(*f)(void *), void (*del)(void *))
 {
-	t_list	*tmp;
-	t_list	*new_lst;
+	t_lst	*tmp;
+	t_lst	*new_lst;
 
 	tmp = NULL;
 	if (!f || !del)

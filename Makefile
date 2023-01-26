@@ -6,11 +6,11 @@
 #    By: mecauchy <mecauchy@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/23 19:18:55 by mecauchy          #+#    #+#              #
-#    Updated: 2023/01/23 20:40:18 by mecauchy         ###   ########.fr        #
+#    Updated: 2023/01/26 00:30:00 by mecauchy         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-FILES			=	main.c singleton.c
+FILES			=	main.c singleton.c parsing.c free.c
 
 SRC_DIR			=	srcs
 
@@ -52,3 +52,7 @@ clean			:
 fclean			:	clean
 					rm -rf $(NAME)
 					make fclean -C $(LIBFT_DIR)
+
+re				:	fclean all
+
+.PHONY			:	all clean fclean re

@@ -6,7 +6,7 @@
 #    By: mecauchy <mecauchy@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/05 11:01:39 by mecauchy          #+#    #+#              #
-#    Updated: 2023/01/05 14:24:51 by mecauchy         ###   ########.fr        #
+#    Updated: 2023/01/26 00:06:17 by mecauchy         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ SRCS	=	ft_isalpha.c ft_isalnum.c ft_isascii.c ft_isdigit.c ft_isprint.c \
 			ft_bzero.c ft_strrchr.c ft_calloc.c ft_substr.c ft_toupper.c \
 			ft_tolower.c  ft_strdup.c ft_strnstr.c ft_strtrim.c\
 			ft_striteri.c ft_split.c ft_itoa.c \
-			ft_strmapi.c  ft_strlcpy.c ft_strlcat.c \
+			ft_strmapi.c  ft_strlcpy.c ft_strlcat.c get_next_line.c \
 			
 BONUS	=	ft_lstsize_bonus.c ft_lstlast_bonus.c ft_lstadd_back_bonus.c \
 			ft_lstdelone_bonus.c ft_lstclear_bonus.c ft_lstnew_bonus.c \

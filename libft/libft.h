@@ -6,7 +6,7 @@
 /*   By: mecauchy <mecauchy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 19:03:38 by mecauchy          #+#    #+#             */
-/*   Updated: 2023/01/05 11:04:45 by mecauchy         ###   ########.fr       */
+/*   Updated: 2023/01/26 00:11:47 by mecauchy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@
 # include <string.h>
 # include <stddef.h>
 # include <stdint.h>
+
+# define BUFFER_SIZE 1
 
 int		ft_isalpha(int c);
 int		ft_strlen(const char *str);
@@ -56,21 +58,22 @@ char	*ft_strtrim(char const *s1, char const *set);
 char	**ft_split(char const *s, char c);
 size_t	ft_strlcpy(char *dest, char const *src, size_t size);
 size_t	ft_strlcat(char *dest, const char *src, size_t size);
+char	*get_next_line(int fd);
 
-typedef struct s_list
+typedef struct s_lst
 {
 	void			*content;
-	struct s_list	*next;
-}				t_list;
+	struct s_lst	*next;
+}				t_lst;
 
-t_list	*ft_lstnew(void *content);
-t_list	*ft_lstlast(t_list *lst);
-t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
-void	ft_lstadd_front(t_list **lst, t_list *new);
-void	ft_lstadd_back(t_list **lst, t_list *new);
-void	ft_lstclear(t_list **lst, void (*del)(void *));
-void	ft_lstdelone(t_list *lst, void (*del)(void *));
-void	ft_lstiter(t_list *lst, void (*f)(void *));
-int		ft_lstsize(t_list *lst);
+t_lst	*ft_lstnew(void *content);
+t_lst	*ft_lstlast(t_lst *lst);
+t_lst	*ft_lstmap(t_lst *lst, void *(*f)(void *), void (*del)(void *));
+void	ft_lstadd_front(t_lst **lst, t_lst *new);
+void	ft_lstadd_back(t_lst **lst, t_lst *new);
+void	ft_lstclear(t_lst **lst, void (*del)(void *));
+void	ft_lstdelone(t_lst *lst, void (*del)(void *));
+void	ft_lstiter(t_lst *lst, void (*f)(void *));
+int		ft_lstsize(t_lst *lst);
 
 #endif

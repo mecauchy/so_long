@@ -6,15 +6,15 @@
 /*   By: mecauchy <mecauchy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 21:56:45 by mecauchy          #+#    #+#             */
-/*   Updated: 2023/01/05 11:16:11 by mecauchy         ###   ########.fr       */
+/*   Updated: 2023/01/25 23:58:52 by mecauchy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-t_list	*ft_lstnew(void *content)
+t_lst	*ft_lstnew(void *content)
 {
-	t_list	*new_elm;
+	t_lst	*new_elm;
 
 	new_elm = malloc((sizeof(*new_elm)));
 	if (!new_elm)

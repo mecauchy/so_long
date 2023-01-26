@@ -6,7 +6,7 @@
 /*   By: mecauchy <mecauchy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 19:29:44 by mecauchy          #+#    #+#             */
-/*   Updated: 2023/01/23 20:28:26 by mecauchy         ###   ########.fr       */
+/*   Updated: 2023/01/26 01:36:47 by mecauchy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,17 +29,42 @@
 # include <stdio.h>
 # include <string.h>
 # include <stdlib.h>
+# include <fcntl.h>
 # include "../mlx/mlx.h"
 # include "../libft/libft.h"
 
-typedef struct s_mlx
+typedef struct s_player
 {
-	void	*mlx;
-	void	*win;
-}				t_mlx;
+	int	x;
+	int	y;
+}				t_player;
 
-// singleton//
+typedef struct s_list
+{
+	void				*mlx;
+	void				*win;
+	void				*img;
+	char				**map;
+	char				*path;
+	int					fd;
+	unsigned int		width;
+	unsigned int		height;
+	int					image_width;
+	int					image_height;
+	t_player			player;
+}				t_list;
 
-t_mlx	*_mlx(void);
+
+// singleton //
+
+t_list	*_list(void);
+
+// free //
+
+void	hasta_la_vista_baby(void);
+
+// parsing //
+
+void	parsing(void);
 
 #endif

@@ -6,15 +6,15 @@
 /*   By: mecauchy <mecauchy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 21:39:00 by mecauchy          #+#    #+#             */
-/*   Updated: 2023/01/05 11:16:33 by mecauchy         ###   ########.fr       */
+/*   Updated: 2023/01/25 23:58:52 by mecauchy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_lstadd_back(t_list **lst, t_list *new)
+void	ft_lstadd_back(t_lst **lst, t_lst *new)
 {
-	t_list	*last_elm;
+	t_lst	*last_elm;
 
 	last_elm = 0;
 	if (lst)
