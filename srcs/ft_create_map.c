@@ -6,11 +6,11 @@
 /*   By: mecauchy <mecauchy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 16:44:36 by mecauchy          #+#    #+#             */
-/*   Updated: 2023/01/25 18:57:39 by mecauchy         ###   ########.fr       */
+/*   Updated: 2023/01/26 22:04:41 by mecauchy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "../include/so_long.h"
 
 void	ft_create_map(t_list *data)
 {

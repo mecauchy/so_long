@@ -6,7 +6,7 @@
 /*   By: mecauchy <mecauchy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 19:56:21 by mecauchy          #+#    #+#             */
-/*   Updated: 2023/01/26 19:00:37 by mecauchy         ###   ########.fr       */
+/*   Updated: 2023/01/27 18:42:22 by mecauchy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,16 +103,30 @@ void	draw_map(void)
 				mlx_put_image_to_window(content->mlx, content->win, content->img,
 					x * content->image_width, y * content->image_height);
 			}
-			else if (content->map[y][x] == 'P')
+			if (content->map[y][x] == 'P')
 			{
 				content->img = mlx_xpm_file_to_image(content->mlx, "texture_xpm/player.xpm",
 					&content->image_width, &content->image_height);
 				mlx_put_image_to_window(content->mlx, content->win, content->img,
 					x * content->image_width, y * content->image_height);
 			}
-			else if (content->map[y][x] == 'C')
+			if (content->map[y][x] == '0')
+			{
+				content->img = mlx_xpm_file_to_image(content->mlx, "texture_xpm/background.xpm",
+					&content->image_width, &content->image_height);
+				mlx_put_image_to_window(content->mlx, content->win, content->img,
+					x * content->image_width, y * content->image_height);
+			}	
+			if (content->map[y][x] == 'C')
 			{
 				content->img = mlx_xpm_file_to_image(content->mlx, "texture_xpm/collectible.xpm",
+					&content->image_width, &content->image_height);
+				mlx_put_image_to_window(content->mlx, content->win, content->img,
+					x * content->image_width, y * content->image_height);
+			}
+			if (content->map[y][x] == 'E')
+			{
+				content->img = mlx_xpm_file_to_image(content->mlx, "texture_xpm/exit.xpm",
 					&content->image_width, &content->image_height);
 				mlx_put_image_to_window(content->mlx, content->win, content->img,
 					x * content->image_width, y * content->image_height);
