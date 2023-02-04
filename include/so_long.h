@@ -6,7 +6,7 @@
 /*   By: mecauchy <mecauchy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 19:29:44 by mecauchy          #+#    #+#             */
-/*   Updated: 2023/01/26 01:36:47 by mecauchy         ###   ########.fr       */
+/*   Updated: 2023/02/02 19:54:44 by mecauchy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,20 @@
 # define ON_EXPOSE 12
 # define ON_DESTROY 17
 
+# define KEY_W 13
+# define KEY_A 0
+# define KEY_S 1
+# define KEY_D 2
+# define KEY_ESC 53
+
+# define IMG_W 32
+# define IMG_H 32
+
+# define UP -1
+# define DOWN 1
+# define LEFT -1
+# define RIGHT 1
+
 # include <unistd.h>
 # include <stdio.h>
 # include <string.h>
@@ -39,19 +53,30 @@ typedef struct s_player
 	int	y;
 }				t_player;
 
+typedef	struct s_img
+{
+	void	*player_up;
+	void	*player_down;
+	void	*player_left;
+	void	*player_right;
+}			t_img;
+
 typedef struct s_list
 {
 	void				*mlx;
 	void				*win;
-	void				*img;
+	// void				*img;
 	char				**map;
 	char				*path;
 	int					fd;
 	unsigned int		width;
 	unsigned int		height;
+	int					position_x;
+	int					position_y;
 	int					image_width;
 	int					image_height;
 	t_player			player;
+	t_img				*img;
 }				t_list;
 
 
@@ -66,5 +91,9 @@ void	hasta_la_vista_baby(void);
 // parsing //
 
 void	parsing(void);
+
+// keyhook //
+
+int	ft_key_hook(int keycode);
 
 #endif

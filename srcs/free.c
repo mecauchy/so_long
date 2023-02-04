@@ -6,7 +6,7 @@
 /*   By: mecauchy <mecauchy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 22:41:50 by mecauchy          #+#    #+#             */
-/*   Updated: 2023/01/26 18:25:37 by mecauchy         ###   ########.fr       */
+/*   Updated: 2023/02/02 20:04:30 by mecauchy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ void	ft_free_map(t_list *content)
         i++;
     }
     free(content->map);
+    // content->map = NULL;
 }
 
 void	hasta_la_vista_baby(void)

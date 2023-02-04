@@ -6,7 +6,7 @@
 /*   By: mecauchy <mecauchy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 19:56:21 by mecauchy          #+#    #+#             */
-/*   Updated: 2023/01/27 18:42:22 by mecauchy         ###   ########.fr       */
+/*   Updated: 2023/02/02 20:33:56 by mecauchy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,66 +21,76 @@ int	close_window(void)
 	exit(0);
 }
 
-//int	ft_win(t_list *data)
-//{
-//	write(1, "Congratulation ! Tou win\n", 25);
-//	write(1, "WINNER\n", 7);
-//	exit(EXIT_SUCCESS);
-//}
+int	ft_win(void)
+{
+	write(1, "Congratulation ! Tou win\n", 25);
+	write(1, "WINNER\n", 7);
+	exit(EXIT_SUCCESS);
+}
 
-//int	ft_exit(t_list *data)
-//{
-//	write(1, "Sorry, there is a problem...\n", 29);
-//	write(1, "Error\n", 6);
-//	exit(EXIT_FAILURE);
-//}
+int	ft_exit(void)
+{
+	write(1, "Sorry, there is a problem...\n", 29);
+	write(1, "Error\n", 6);
+	exit(EXIT_FAILURE);
+}
 
-//static void	ft_player_move_to_mlx(t_list *data, char *position, int keyboard)
-//{
-//	if (position == 'y' && keyboard == UP)
-//	{
-//		mlx_put_image_to_window(data);
-//		(data->position_x * ...), (data->position_y * ...);
-//	}
-//	if (position == 'x' && keyboard == LEFT)
-//	{
-//		mlx_put_image_to_window(data);
-//		(data->position_x * ...), data->position_y * ...);
-//	}
-//	if (position == 'y' && keyboard == DOWN)
-//	{
-//		mlx_put_image_to_window(data);
-//		(data->position_x * ...), data->position_y * ...);
-//	}
-//	if (position == 'x' && keyboard == RIGHT);
-//		mlx_put_image_to_window(data);
-//		(data->position_x * ...), data->position_y * ...);
-//}
+static void	ft_move_up(t_list *content, char position, int keyboard)
+{
+	if (position == 'y' && keyboard == KEY_W)
+	{
+		mlx_put_image_to_window(content->mlx, content->win, content->img->player_up, 
+			(content->position_x * IMG_W), (content->position_y * IMG_H));
+	}
+}
 
-//int	ft_key_hook(int keycode)
-//{
-//	t_list	*data;
+static void	ft_move_left(t_list *content, char position, int keyboard)
+{
+	if (position == 'x' && keyboard == KEY_A)
+	{
+		mlx_put_image_to_window(content->mlx, content->win, content->img->player_left, 
+			(content->position_x * IMG_W), (content->position_y * IMG_H));
+	}
+}
 
-//	data = _list();
-//	printf("%d\n", keycode);
-//	if (keycode= ESC)
-//		ft_exit(data);
-//	else if(keycode == W)
-//		ft_move(data, 'y', UP);
-//	else if (keycode == A)
-//		ft_move(data, 'x', LEFT);
-//	else if (keycode == S)
-//		ft_move(data, 'y', DOWN);
-//	else if (keycode == D)
-//		ft_move(data, 'x', RIGHT);
-//	if (keycode == E)
-//		ft_win(data);
-//	return (0);
-//}
+static void	ft_move_down(t_list *content, char position, int keyboard)
+{
+	if (position == 'y' && keyboard == KEY_S)
+	{
+		mlx_put_image_to_window(content->mlx, content->win, content->img->player_down, 
+			(content->position_x * IMG_W), (content->position_y * IMG_H));
+	}
+}
 
-//int	ft_key_hook(int keycode)
-//{
-//}
+static void	ft_move_right(t_list *content, char position, int keyboard)
+{
+	if (position == 'x' && keyboard == KEY_D)
+	{
+		mlx_put_image_to_window(content->mlx, content->win, content->img->player_right, 
+			(content->position_x * IMG_W), (content->position_y * IMG_H));
+	}
+}
+
+int	ft_key_hook(int keycode)
+{
+	t_list	*content;
+
+	content = _list();
+	printf("%d\n", keycode);
+	if (keycode == KEY_ESC)
+		ft_exit();
+	else if(keycode == KEY_W)
+		ft_move_up(content, 'y', UP);	
+	else if (keycode == KEY_A)
+		ft_move_left(content, 'x', LEFT);
+	else if (keycode == KEY_S)
+		ft_move_down(content, 'y', DOWN);
+	else if (keycode == KEY_D)
+		ft_move_right(content, 'x', RIGHT);
+	if (keycode == 'E')
+		ft_win();
+	return (0);
+}
 
 void	draw_map(void)
 {
@@ -153,10 +163,11 @@ int	main(int ac, char **av)
 	content->win = mlx_new_window(content->mlx, content->width * 32,
 		content->height * 32, "so_long");
 	mlx_hook(content->win, ON_DESTROY, 0, close_window, NULL);
-	//mlx_key_hook(content->win, ft_key_hook, NULL);
+	// dmlx_key_dhook(content->win, ft_key_hook, NULL);
 	if (content->img)
 		mlx_destroy_image(content->mlx, content->img);
 	draw_map();
 	mlx_loop(content->mlx);
 	return (0);
+	// appler keyhook pour les mouvements
 }
