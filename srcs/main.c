@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mecauchy <mecauchy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mcauchy <mcauchy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 19:56:21 by mecauchy          #+#    #+#             */
-/*   Updated: 2023/02/02 20:33:56 by mecauchy         ###   ########.fr       */
+/*   Updated: 2023/02/06 14:53:01 by mcauchy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	close_window(void)
 {
 	t_list	*content;
-	
+
 	content = _list();
 	mlx_destroy_window(content->mlx, content->win);
 	exit(0);
@@ -37,19 +37,22 @@ int	ft_exit(void)
 
 static void	ft_move_up(t_list *content, char position, int keyboard)
 {
-	if (position == 'y' && keyboard == KEY_W)
-	{
-		mlx_put_image_to_window(content->mlx, content->win, content->img->player_up, 
-			(content->position_x * IMG_W), (content->position_y * IMG_H));
-	}
+	unsigned int	x;
+	unsigned int	y;
+
+	if (content->map[x][y - 1] != '1')
+		content->map[x][y - 1] 
+	return ;
 }
 
 static void	ft_move_left(t_list *content, char position, int keyboard)
 {
+
 	if (position == 'x' && keyboard == KEY_A)
 	{
-		mlx_put_image_to_window(content->mlx, content->win, content->img->player_left, 
+		mlx_put_image_to_window(content->mlx, content->win, content->img->player_left,
 			(content->position_x * IMG_W), (content->position_y * IMG_H));
+		content->map[x][y] += 1;
 	}
 }
 
@@ -57,7 +60,7 @@ static void	ft_move_down(t_list *content, char position, int keyboard)
 {
 	if (position == 'y' && keyboard == KEY_S)
 	{
-		mlx_put_image_to_window(content->mlx, content->win, content->img->player_down, 
+		mlx_put_image_to_window(content->mlx, content->win, content->img->player_down,
 			(content->position_x * IMG_W), (content->position_y * IMG_H));
 	}
 }
@@ -66,9 +69,24 @@ static void	ft_move_right(t_list *content, char position, int keyboard)
 {
 	if (position == 'x' && keyboard == KEY_D)
 	{
-		mlx_put_image_to_window(content->mlx, content->win, content->img->player_right, 
+		mlx_put_image_to_window(content->mlx, content->win, content->img->player_right,
 			(content->position_x * IMG_W), (content->position_y * IMG_H));
 	}
+}
+
+static void	ft_key(t_list *content, int keycode)
+{
+	t_list *content;
+
+	content = _list;
+	if (keycode == KEY_W)
+		ft_move_down(content, 'y', UP);
+	else if (keycode == KEY_A)
+		ft_move_left(content, 'x', LEFT);
+	else if (keycode == KEY_S)
+		ft_move_down(content, 'y', DOWN);
+	else if (keycode == KEY_D)
+		ft_move_right(content, 'x', RIGHT);
 }
 
 int	ft_key_hook(int keycode)
@@ -79,14 +97,16 @@ int	ft_key_hook(int keycode)
 	printf("%d\n", keycode);
 	if (keycode == KEY_ESC)
 		ft_exit();
-	else if(keycode == KEY_W)
-		ft_move_up(content, 'y', UP);	
-	else if (keycode == KEY_A)
-		ft_move_left(content, 'x', LEFT);
-	else if (keycode == KEY_S)
-		ft_move_down(content, 'y', DOWN);
-	else if (keycode == KEY_D)
-		ft_move_right(content, 'x', RIGHT);
+
+	// else if(keycode == KEY_W)
+	// 	ft_
+	// else if (keycode == KEY_A)
+	// 	ft_move_left(content, 'x', LEFT);
+	// else if (keycode == KEY_S)
+	// 	ft_move_down(content, 'y', DOWN);
+	// else if (keycode == KEY_D)
+	// 	ft_move_right(content, 'x', RIGHT);
+
 	if (keycode == 'E')
 		ft_win();
 	return (0);
@@ -126,7 +146,7 @@ void	draw_map(void)
 					&content->image_width, &content->image_height);
 				mlx_put_image_to_window(content->mlx, content->win, content->img,
 					x * content->image_width, y * content->image_height);
-			}	
+			}
 			if (content->map[y][x] == 'C')
 			{
 				content->img = mlx_xpm_file_to_image(content->mlx, "texture_xpm/collectible.xpm",
@@ -150,7 +170,7 @@ void	draw_map(void)
 int	main(int ac, char **av)
 {
 	t_list	*content;
-	
+
 	content = _list();
 	if (ac != 2)
 		return (0);
@@ -163,7 +183,7 @@ int	main(int ac, char **av)
 	content->win = mlx_new_window(content->mlx, content->width * 32,
 		content->height * 32, "so_long");
 	mlx_hook(content->win, ON_DESTROY, 0, close_window, NULL);
-	// dmlx_key_dhook(content->win, ft_key_hook, NULL);
+	mlx_key_hook(content->win, ft_key_hook, NULL);
 	if (content->img)
 		mlx_destroy_image(content->mlx, content->img);
 	draw_map();
