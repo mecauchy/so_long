@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mecauchy <mecauchy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mcauchy <mcauchy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 21:55:23 by mecauchy          #+#    #+#             */
-/*   Updated: 2023/01/26 18:59:49 by mecauchy         ###   ########.fr       */
+/*   Updated: 2023/03/07 18:51:18 by mcauchy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ unsigned int	ft_size_map(void)
 	t_list			*content;
 	char			*line;
 	unsigned int	size;
-	
+
 	size = 0;
 	content = _list();
 	line = get_next_line(content->fd);
@@ -82,6 +82,48 @@ void	check_corner(void)
 	}
 }
 
+void	fill_mapinfo(void)
+{
+	t_list	*content;
+	unsigned int	x;
+	unsigned int	y;
+
+	x = 0;
+	y = 0;
+	content = _list();
+	while (y < content->height)
+	{
+		while (x < content->width)
+		{
+			if (content->map[y][x] == 'P')
+			{
+				content->position_x = x;
+				content->position_y = y;
+				content->map_info.nb_player++;
+			}
+			if (content->map[y][x] == 'C')
+				content->map_info.nb_collectible++;
+			if (content->map[y][x] == 'E')
+				content->map_info.nb_exit++;
+			x++;
+		}
+		x = 0;
+		y++;
+	}
+}
+
+void	check_info(void)
+{
+	t_list	*content;
+
+	content = _list();
+	if (content->map_info.nb_player != 1 || content->map_info.nb_exit != 1 || content->map_info.nb_collectible == 0)
+	{
+		printf("nb_player = %d, nb_exit = %d, nb_collectible = %d\n", content->map_info.nb_player, content->map_info.nb_exit, content->map_info.nb_collectible);
+		hasta_la_vista_baby();
+	}
+}
+
 void	parsing(void)
 {
 	t_list	*content;
@@ -92,4 +134,6 @@ void	parsing(void)
 		hasta_la_vista_baby();
 	ft_make_map();
 	check_corner();
+	fill_mapinfo();
+	check_info();
 }
