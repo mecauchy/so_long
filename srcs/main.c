@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcauchy <mcauchy@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mecauchy <mecauchy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 19:56:21 by mecauchy          #+#    #+#             */
-/*   Updated: 2023/03/08 21:41:52 by mcauchy          ###   ########.fr       */
+/*   Updated: 2023/03/08 22:09:42 by mecauchy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	check_mov(unsigned int x, unsigned int y)
 	t_list	*content;
 
 	content = _list();
-	if (y < 0 || x < 0 || y >= content->width || x >= content->height)
+	if (y >= content->width || x >= content->height)
 		return (0);
 	if (content->map[x][y] == '1')
 		return (0);
