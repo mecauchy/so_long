@@ -6,7 +6,7 @@
 /*   By: mcauchy <mcauchy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 21:55:23 by mecauchy          #+#    #+#             */
-/*   Updated: 2023/03/07 18:51:18 by mcauchy          ###   ########.fr       */
+/*   Updated: 2023/03/08 21:32:55 by mcauchy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,8 +97,8 @@ void	fill_mapinfo(void)
 		{
 			if (content->map[y][x] == 'P')
 			{
-				content->position_x = x;
-				content->position_y = y;
+				content->position_x = y;
+				content->position_y = x;
 				content->map_info.nb_player++;
 			}
 			if (content->map[y][x] == 'C')
@@ -136,4 +136,59 @@ void	parsing(void)
 	check_corner();
 	fill_mapinfo();
 	check_info();
+}
+
+void	draw_map(char **map)
+{
+	t_list				*content;
+	unsigned int		x;
+	unsigned int		y;
+
+	content = _list();
+	y = 0;
+	x = 0;
+	while (map[y])
+	{
+		x = 0;
+		while (x < content->width)
+		{
+			if (map[y][x] == '1')
+			{
+				content->img = mlx_xpm_file_to_image(content->mlx, "texture_xpm/wall.xpm",
+					&content->image_width, &content->image_height);
+				mlx_put_image_to_window(content->mlx, content->win, content->img,
+					x * content->image_width, y * content->image_height);
+			}
+			if (map[y][x] == 'P')
+			{
+				content->img = mlx_xpm_file_to_image(content->mlx, "texture_xpm/player.xpm",
+					&content->image_width, &content->image_height);
+				mlx_put_image_to_window(content->mlx, content->win, content->img,
+					x * content->image_width, y * content->image_height);
+			}
+			if (map[y][x] == '0')
+			{
+				content->img = mlx_xpm_file_to_image(content->mlx, "texture_xpm/background.xpm",
+					&content->image_width, &content->image_height);
+				mlx_put_image_to_window(content->mlx, content->win, content->img,
+					x * content->image_width, y * content->image_height);
+			}
+			if (map[y][x] == 'C')
+			{
+				content->img = mlx_xpm_file_to_image(content->mlx, "texture_xpm/collectible.xpm",
+					&content->image_width, &content->image_height);
+				mlx_put_image_to_window(content->mlx, content->win, content->img,
+					x * content->image_width, y * content->image_height);
+			}
+			if (map[y][x] == 'E')
+			{
+				content->img = mlx_xpm_file_to_image(content->mlx, "texture_xpm/exit.xpm",
+					&content->image_width, &content->image_height);
+				mlx_put_image_to_window(content->mlx, content->win, content->img,
+					x * content->image_width, y * content->image_height);
+			}
+			x++;
+		}
+		y++;
+	}
 }

@@ -6,11 +6,23 @@
 /*   By: mcauchy <mcauchy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 19:56:21 by mecauchy          #+#    #+#             */
-/*   Updated: 2023/03/07 19:23:30 by mcauchy          ###   ########.fr       */
+/*   Updated: 2023/03/08 21:41:52 by mcauchy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/so_long.h"
+
+void	ft_print_map(char **map)
+{
+	int	i;
+
+	i = 0;
+	while (map[i])
+	{
+		printf("%s\n", map[i]);
+		i++;
+	}
+}
 
 int	close_window(void)
 {
@@ -59,7 +71,7 @@ int	ft_exit(void)
 	exit(EXIT_FAILURE);
 }
 
-static void	ft_move_up(void)
+static char	**ft_move_up(char **map)
 {
 	t_list	*content;
 	int		x;
@@ -70,14 +82,18 @@ static void	ft_move_up(void)
 	y = content->position_y;
 	if (check_mov(x - 1, y))
 	{
-		if (content->map[x - 1][y] == 'E')
+		if (map[x - 1][y] == 'E')
 			ft_win();
-		content->map[x][y] = '0';
-		content->map[x - 1][y] = 'P';
+		else if (map[x - 1][y] == 'C')
+			content->map_info.nb_coin++;
+		map[x][y] = '0';
+		map[x - 1][y] = 'P';
+		content->position_x--;
 	}
+	return (map);
 }
 
-static void	ft_move_down(void)
+static char	**ft_move_down(char **map)
 {
 	t_list	*content;
 	int		x;
@@ -88,32 +104,18 @@ static void	ft_move_down(void)
 	y = content->position_y;
 	if (check_mov(x + 1, y))
 	{
-		if (content->map[x + 1][y] == 'E')
+		if (map[x + 1][y] == 'E')
 			ft_win();
-		content->map[x][y] = '0';
-		content->map[x + 1][y] = 'P';
+		else if (map[x + 1][y] == 'C')
+			content->map_info.nb_coin++;
+		map[x][y] = '0';
+		map[x + 1][y] = 'P';
+		content->position_x++;
 	}
+	return (map);
 }
 
-static void	ft_move_right(void)
-{
-	t_list	*content;
-	int		x;
-	int		y;
-
-	content = _list();
-	x = content->position_x;
-	y = content->position_y;
-	if (check_mov(x, y - 1))
-	{
-		if (content->map[x][y - 1] == 'E')
-			ft_win();
-		content->map[x][y] = '0';
-		content->map[x][y - 1] = 'P';
-	}
-}
-
-static void	ft_move_left(void)
+static char	**ft_move_right(char **map)
 {
 	t_list	*content;
 	int		x;
@@ -124,91 +126,53 @@ static void	ft_move_left(void)
 	y = content->position_y;
 	if (check_mov(x, y + 1))
 	{
-		if (content->map[x][y + 1] == 'E')
+		if (map[x][y + 1] == 'E')
 			ft_win();
-		content->map[x][y] = '0';
-		content->map[x][y + 1] = 'P';
+		else if (map[x][y + 1] == 'C')
+			content->map_info.nb_coin++;
+		map[x][y] = '0';
+		map[x][y + 1] = 'P';
+		content->position_y++;
 	}
+	return (map);
 }
 
-int	ft_key_hook(int keycode)
+static char	**ft_move_left(char **map)
 {
-	printf("keycode = %d\n", keycode);
+	t_list	*content;
+	int		x;
+	int		y;
+
+	content = _list();
+	x = content->position_x;
+	y = content->position_y;
+	if (check_mov(x, y - 1))
+	{
+		if (map[x][y - 1] == 'E')
+			ft_win();
+		else if (map[x][y - 1] == 'C')
+			content->map_info.nb_coin++;
+		map[x][y] = '0';
+		map[x][y - 1] = 'P';
+		content->position_y--;
+	}
+	return (map);
+}
+
+int	ft_key_hook(int keycode, t_list *content)
+{
 	if (keycode == KEY_ESC)
 		ft_exit();
 	else if(keycode == KEY_Z)
-		ft_move_up();
+		ft_move_up(content->map);
 	else if (keycode == KEY_A)
-		ft_move_left();
+		ft_move_left(content->map);
 	else if (keycode == KEY_S)
-		ft_move_down();
+		ft_move_down(content->map);
 	else if (keycode == KEY_D)
-		ft_move_right();
+		ft_move_right(content->map);
+	draw_map(content->map);
 	return (0);
-}
-
-void	draw_map(void)
-{
-	t_list				*content;
-	unsigned int		x;
-	unsigned int		y;
-
-	content = _list();
-	y = 0;
-	x = 0;
-	while (content->map[y])
-	{
-		x = 0;
-		while (content->map[y][x])
-		{
-			if (content->map[y][x] == '1')
-			{
-				content->img = mlx_xpm_file_to_image(content->mlx, "texture_xpm/wall.xpm",
-					&content->image_width, &content->image_height);
-				mlx_put_image_to_window(content->mlx, content->win, content->img,
-					x * content->image_width, y * content->image_height);
-			}
-			if (content->map[y][x] == 'P')
-			{
-				content->img = mlx_xpm_file_to_image(content->mlx, "texture_xpm/player.xpm",
-					&content->image_width, &content->image_height);
-				mlx_put_image_to_window(content->mlx, content->win, content->img,
-					x * content->image_width, y * content->image_height);
-			}
-			if (content->map[y][x] == '0')
-			{
-				content->img = mlx_xpm_file_to_image(content->mlx, "texture_xpm/background.xpm",
-					&content->image_width, &content->image_height);
-				mlx_put_image_to_window(content->mlx, content->win, content->img,
-					x * content->image_width, y * content->image_height);
-			}
-			if (content->map[y][x] == 'C')
-			{
-				content->img = mlx_xpm_file_to_image(content->mlx, "texture_xpm/collectible.xpm",
-					&content->image_width, &content->image_height);
-				mlx_put_image_to_window(content->mlx, content->win, content->img,
-					x * content->image_width, y * content->image_height);
-			}
-			if (content->map[y][x] == 'E')
-			{
-				content->img = mlx_xpm_file_to_image(content->mlx, "texture_xpm/exit.xpm",
-					&content->image_width, &content->image_height);
-				mlx_put_image_to_window(content->mlx, content->win, content->img,
-					x * content->image_width, y * content->image_height);
-			}
-			x++;
-		}
-		y++;
-	}
-}
-
-void	refresh_window(void)
-{
-	t_list	*content;
-
-	content = _list();
-	mlx_destroy_image(content->mlx, content->img);
-	content->img = mlx_new_image(content->mlx, content->width * 32, content->height * 32);
 }
 
 int	main(int ac, char **av)
@@ -227,10 +191,8 @@ int	main(int ac, char **av)
 	content->win = mlx_new_window(content->mlx, content->width * 32,
 		content->height * 32, "so_long");
 	mlx_hook(content->win, ON_DESTROY, 0, close_window, NULL);
-	mlx_key_hook(content->win, ft_key_hook, NULL);
-	// refresh_window();
-	draw_map();
+	mlx_key_hook(content->win, ft_key_hook, content);
+	draw_map(content->map);
 	mlx_loop(content->mlx);
 	return (0);
-	// appler keyhook pour les mouvements
 }

@@ -6,7 +6,7 @@
 /*   By: mcauchy <mcauchy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 19:29:44 by mecauchy          #+#    #+#             */
-/*   Updated: 2023/03/07 19:22:57 by mcauchy          ###   ########.fr       */
+/*   Updated: 2023/03/08 21:26:38 by mcauchy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,11 +92,11 @@ t_list	*_list(void);
 void	hasta_la_vista_baby(void);
 
 // parsing //
-
+void	draw_map(char **map);
 void	parsing(void);
 
 // keyhook //
 
-int	ft_key_hook(int keycode);
+int	ft_key_hook(int keycode, t_list *content);
 
 #endif
