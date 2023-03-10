@@ -6,7 +6,7 @@
 /*   By: mcauchy <mcauchy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 19:29:44 by mecauchy          #+#    #+#             */
-/*   Updated: 2023/03/08 21:26:38 by mcauchy          ###   ########.fr       */
+/*   Updated: 2023/03/10 18:32:48 by mcauchy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@ typedef struct s_list
 	int					fd;
 	unsigned int		width;
 	unsigned int		height;
+	unsigned int		nb_step;
 	int					position_x;
 	int					position_y;
 	int					image_width;

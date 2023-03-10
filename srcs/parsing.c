@@ -6,7 +6,7 @@
 /*   By: mcauchy <mcauchy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 21:55:23 by mecauchy          #+#    #+#             */
-/*   Updated: 2023/03/08 21:32:55 by mcauchy          ###   ########.fr       */
+/*   Updated: 2023/03/10 18:33:18 by mcauchy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -191,4 +191,6 @@ void	draw_map(char **map)
 		}
 		y++;
 	}
+	mlx_string_put(content->mlx, content->win, 10, 10, 0xFFFFFF, "Press ESC to quit");
+	mlx_string_put(content->mlx, content->win, 10, 30, 0xFF0099, ft_strjoin("steps : ", ft_itoa(content->nb_step)));
 }
