@@ -6,7 +6,7 @@
 /*   By: mcauchy <mcauchy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 19:56:21 by mecauchy          #+#    #+#             */
-/*   Updated: 2023/03/10 18:35:02 by mcauchy          ###   ########.fr       */
+/*   Updated: 2023/03/10 18:47:44 by mcauchy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,7 @@ static char	**ft_move_up(char **map)
 		map[x - 1][y] = 'P';
 		content->position_x--;
 		content->nb_step++;
+		content->mvmt_flag = UP;
 	}
 	return (map);
 }
@@ -113,6 +114,7 @@ static char	**ft_move_down(char **map)
 		map[x + 1][y] = 'P';
 		content->position_x++;
 		content->nb_step++;
+		content->mvmt_flag = DOWN;
 	}
 	return (map);
 }
@@ -136,6 +138,7 @@ static char	**ft_move_right(char **map)
 		map[x][y + 1] = 'P';
 		content->position_y++;
 		content->nb_step++;
+		content->mvmt_flag = RIGHT;
 	}
 	return (map);
 }
@@ -159,6 +162,7 @@ static char	**ft_move_left(char **map)
 		map[x][y - 1] = 'P';
 		content->position_y--;
 		content->nb_step++;
+		content->mvmt_flag = LEFT;
 	}
 	return (map);
 }

@@ -6,7 +6,7 @@
 /*   By: mcauchy <mcauchy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 21:55:23 by mecauchy          #+#    #+#             */
-/*   Updated: 2023/03/10 18:33:18 by mcauchy          ###   ########.fr       */
+/*   Updated: 2023/03/10 18:55:47 by mcauchy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,11 +138,27 @@ void	parsing(void)
 	check_info();
 }
 
+char	*ft_player_move(void)
+{
+	t_list	*content;
+
+	content = _list();
+	if (content->mvmt_flag == UP)
+		return ("texture_xpm/player_up.xpm");
+	else if (content->mvmt_flag == DOWN)
+		return ("texture_xpm/player_down.xpm");
+	else if (content->mvmt_flag == LEFT)
+		return ("texture_xpm/player_left.xpm");
+	else if (content->mvmt_flag == RIGHT)
+		return ("texture_xpm/player_right.xpm");
+	return (NULL);
+}
+
 void	draw_map(char **map)
 {
-	t_list				*content;
-	unsigned int		x;
-	unsigned int		y;
+	t_list			*content;
+	unsigned int	x;
+	unsigned int	y;
 
 	content = _list();
 	y = 0;
@@ -161,7 +177,7 @@ void	draw_map(char **map)
 			}
 			if (map[y][x] == 'P')
 			{
-				content->img = mlx_xpm_file_to_image(content->mlx, "texture_xpm/player.xpm",
+				content->img = mlx_xpm_file_to_image(content->mlx, ft_player_move(),
 					&content->image_width, &content->image_height);
 				mlx_put_image_to_window(content->mlx, content->win, content->img,
 					x * content->image_width, y * content->image_height);
