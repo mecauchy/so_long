@@ -6,7 +6,7 @@
 /*   By: mcauchy <mcauchy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 19:29:44 by mecauchy          #+#    #+#             */
-/*   Updated: 2023/03/08 21:26:38 by mcauchy          ###   ########.fr       */
+/*   Updated: 2023/03/10 18:47:07 by mcauchy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,10 @@
 # define IMG_W 32
 # define IMG_H 32
 
-# define UP -1
+# define UP 0
 # define DOWN 1
-# define LEFT -1
-# define RIGHT 1
+# define LEFT 2
+# define RIGHT 3
 
 # include <unistd.h>
 # include <stdio.h>
@@ -74,10 +74,12 @@ typedef struct s_list
 	int					fd;
 	unsigned int		width;
 	unsigned int		height;
+	unsigned int		nb_step;
 	int					position_x;
 	int					position_y;
 	int					image_width;
 	int					image_height;
+	int					mvmt_flag;
 	t_img				*img;
 	t_map				map_info;
 }				t_list;
