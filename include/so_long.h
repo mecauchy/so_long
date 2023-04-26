@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcauchy <mcauchy@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mecauchy <mecauchy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 19:29:44 by mecauchy          #+#    #+#             */
-/*   Updated: 2023/03/10 18:47:07 by mcauchy          ###   ########.fr       */
+/*   Updated: 2023/03/25 17:14:14 by mecauchy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@
 # include <string.h>
 # include <stdlib.h>
 # include <fcntl.h>
-# include "../mlx/mlx.h"
+# include "../minilibx/mlx.h"
 # include "../libft/libft.h"
 
 typedef	struct s_img

@@ -6,7 +6,7 @@
 #    By: mecauchy <mecauchy@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/05 11:01:39 by mecauchy          #+#    #+#              #
-#    Updated: 2023/01/26 00:06:17 by mecauchy         ###   ########.fr        #
+#    Updated: 2023/03/25 16:31:27 by mecauchy         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,7 +33,7 @@ NAME	=	libft.a
 
 CC		=	cc
 
-CFLAGS	=	-Wall -Wextra -Werror
+CFLAGS	=	-fPIE -Wall -Wextra -Werror
 
 DEBUG	=	-g3
 

@@ -6,7 +6,7 @@
 #    By: mecauchy <mecauchy@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/23 19:18:55 by mecauchy          #+#    #+#              #
-#    Updated: 2023/01/26 00:30:00 by mecauchy         ###   ########.fr        #
+#    Updated: 2023/04/26 15:55:17 by mecauchy         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,7 @@ SRCS 			=	$(addprefix $(SRC_DIR)/, $(FILES))
 
 OBJS 			=	$(addprefix $(DIR_OBJ)/, $(FILES:.c=.o))
 
-CC				=	clang
+CC				=	gcc
 
 CFLAGS			=	-Wall -Wextra -Werror -fsanitize=address -g3
 
@@ -30,12 +30,13 @@ NAME 			=	so_long
 
 HEADER			=	include/so_long.h
 
-MLX_MAC			=	-lmlx -framework OpenGL -framework AppKit
+#LIBS			=	-lmlx -framework OpenGL -framework AppKit
+LIBS			=  -lX11 -lXext -lbsd
 
 all				:	MK_LIBFT $(NAME)
 
 $(NAME)			:	$(OBJS)
-					$(CC) $(OBJS) $(CFLAGS) -Lmlx $(MLX_MAC) $(LIBFT_DIR)/libft.a -o $(NAME)
+					$(CC) $(OBJS) $(CFLAGS) $(LIBS) $(LIBFT_DIR)/libft.a mlx/libmlx_Linux.a -o $(NAME)
 
 $(DIR_OBJ)/%.o	:	$(SRC_DIR)/%.c $(HEADER)
 					mkdir -p $(@D)
