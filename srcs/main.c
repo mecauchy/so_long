@@ -169,6 +169,7 @@ static char	**ft_move_left(char **map)
 
 int	ft_key_hook(int keycode, t_list *content)
 {
+	/* edit all key WASD*/
 	if (keycode == KEY_ESC)
 		ft_exit();
 	else if(keycode == KEY_Z)
