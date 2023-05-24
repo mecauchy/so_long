@@ -32,6 +32,8 @@
 # define KEY_Q 0
 # define KEY_ESC 53
 
+/* modifier les cles avec WASD*/
+
 # define IMG_W 32
 # define IMG_H 32
 
